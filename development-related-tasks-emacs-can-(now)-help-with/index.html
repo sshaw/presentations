@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Development Related Tasks Emacs Can (Now?) Help With</title>
+<meta name="author" content="(Skye Shaw •  (link (:type https :path //github.com/sshaw :format bracket :raw-link https://github.com/sshaw :application nil :search-option nil :begin 13 :end 59 :contents-begin 41 :contents-end 57 :post-blank 0 :parent #0) github.com/sshaw))"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/reveal.js/3.0.0/css/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/reveal.js/3.0.0/css/theme/moon.css" id="theme"/>
+
+<link rel="stylesheet" href="styles.css"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/reveal.js/3.0.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Development Related Tasks Emacs Can (Now?) Help With</h1><h2 class="author">Skye Shaw • <a href="https://github.com/sshaw">github.com/sshaw</a></h2>
+</section>
+
+<section>
+<section id="slide-org509b81d">
+<h2 id="org509b81d">Checking Builds on CI Services</h2>
+<div class="outline-text-2" id="text-org509b81d">
+</div>
+</section>
+<section id="slide-orgfb4a6a7">
+<h3 id="orgfb4a6a7">CircleCI</h3>
+
+<div class="figure">
+<p><img src="./img/circleci-builds.png" alt="circleci-builds.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org14ac888">
+<h3 id="org14ac888">Travis CI</h3>
+
+<div class="figure">
+<p><img src="./img/travis-ci-builds.png" alt="travis-ci-builds.png" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd7df463">
+<h2 id="orgd7df463">Sharing Bits of Code</h2>
+<div class="outline-text-2" id="text-orgd7df463">
+</div>
+</section>
+<section id="slide-orgdd2cf3e">
+<h3 id="orgdd2cf3e">Bug Reports</h3>
+
+<div class="figure">
+<p><img src="./img/github-issue.png" alt="github-issue.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org8f6402d">
+<h3 id="org8f6402d">Comments</h3>
+<p>
+<img src="./img/github-comment.png" alt="github-comment.png" />
+<img src="./img/disqus-comment.png" alt="disqus-comment.png" />
+</p>
+
+</section>
+<section id="slide-orgeaa7346">
+<h3 id="orgeaa7346">Messaging</h3>
+<p>
+<img src="./img/slack-link1.png" alt="slack-link1.png" />
+<img src="./img/slack-code.png" alt="slack-code.png" />
+<img src="./img/slack-link2.png" alt="slack-link2.png" />
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgac413a1">
+<h2 id="orgac413a1">How Can Emacs Help?</h2>
+
+<div class="figure">
+<p><img src="./img/sublime-emacs.png" alt="sublime-emacs.png" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org1da5177">
+<h2 id="org1da5177">Checking Builds on CI Services</h2>
+<p>
+<code>M-x build-status-mode</code>
+</p>
+
+
+<div class="figure">
+<p><a href="https://github.com/sshaw/build-status"><img src="img/build-status-homepage.png" alt="build-status-homepage.png" /></a>
+</p>
+</div>
+
+</section>
+<section id="slide-orgaba5561">
+<h3 id="orgaba5561">build-status</h3>
+<ul>
+<li>Detects a project's CI config file</li>
+<li>Shows the build's status in the mode line</li>
+<li>Click the build status lighter to open the build's web page</li>
+<li>Works with Travis CI &amp; CircleCI</li>
+
+</ul>
+
+</section>
+<section id="slide-orgbf1a3c3">
+<h3 id="orgbf1a3c3">build-status</h3>
+<p>
+Set your token
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">optional</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span> build-status-travis-ci-token <span style="color: #8b2252;">"TOKEN"</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Can also be set via Git
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-shell-script">git config --add build-status.api-token TOKEN
+</pre>
+</div>
+
+<p>
+Set the check interval
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">optional, defaults to 300</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span> build-status-check-interval 120<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+</section>
+<section id="slide-org9f4ba14">
+<h3 id="org9f4ba14">build-status</h3>
+<p>
+Adjust some colors
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-emacs-lisp"><span style="color: #707183;">(</span>set-face-foreground 'build-status-passed-face <span style="color: #8b2252;">"tan1"</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>set-face-background 'build-status-queued-face <span style="color: #8b2252;">"mediumblue"</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Ignore a status
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-emacs-lisp"><span style="color: #707183;">(</span>add-to-list 'build-status-travis-ci-status-mapping-alist
+             '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"created"</span> . ignore<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+</section>
+<section id="slide-org40f0f29">
+<h3 id="org40f0f29">build-status</h3>
+<ul>
+<li><code>M-x package-install</code> <code>build-status</code></li>
+
+</ul>
+<p>
+<a href="https://github.com/sshaw/build-status">https://github.com/sshaw/build-status</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb1191df">
+<h2 id="orgb1191df">Sharing Bits of Code</h2>
+<ul>
+<li>Links &amp; URLs</li>
+<li>Snippets</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org6059d62">
+<h2 id="org6059d62">Sharing Bits of Code: Links &amp; URLs</h2>
+<p>
+<code>M-x git-link</code>
+</p>
+
+
+<div class="figure">
+<p><a href="https://github.com/sshaw/git-link"><img src="img/git-link-homepage.png" alt="git-link-homepage.png" /></a>
+</p>
+</div>
+
+</section>
+<section id="slide-orga6561a5">
+<h3 id="orga6561a5">git-link</h3>
+<ul>
+<li>Adds GitHub/Bitbucket URL for a buffer location to kill ring</li>
+<li>Accounts for current line number and active region</li>
+<li>Link to commit at point</li>
+<li>Works with <a href="https://github.com/pidu/git-timemachine">Git Time Machine</a></li>
+<li>Supports GitLab too</li>
+<li>And more!</li>
+
+</ul>
+
+</section>
+<section id="slide-org24100db">
+<h3 id="org24100db">git-link</h3>
+<p>
+<code>C-u M-x git-link</code> prompts for remote.
+</p>
+
+<p>
+Always use Git SHA in link
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span> git-link-use-commit t<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Set the defaults
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">defaults to origin</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span> git-link-default-remote <span style="color: #8b2252;">"og"</span><span style="color: #707183;">)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">defaults to master</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span> git-link-default-branch <span style="color: #8b2252;">"featureX"</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Defaults can also be set via Git
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-shell-script">git config --add git-link.remote og
+git config --add git-link.branch featureX
+</pre>
+</div>
+
+</section>
+<section id="slide-org977ade6">
+<h3 id="org977ade6">git-link</h3>
+<p>
+Open link on kill
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span> git-link-open-in-browser t<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Bind some keys
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-emacs-lisp"><span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-c g l"</span><span style="color: #7388d6;">)</span> 'git-link<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-c g c"</span><span style="color: #7388d6;">)</span> 'git-link-commit<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-c g h"</span><span style="color: #7388d6;">)</span> 'git-link-homepage<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Add private repository
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-emacs-lisp"><span style="color: #707183;">(</span>eval-after-load 'git-link
+  '<span style="color: #7388d6;">(</span><span style="color: #a020f0;">progn</span>
+    <span style="color: #909183;">(</span>add-to-list 'git-link-remote-alist
+      '<span style="color: #709870;">(</span><span style="color: #8b2252;">"github.example.com"</span> git-link-github<span style="color: #709870;">)</span><span style="color: #909183;">)</span>
+    <span style="color: #909183;">(</span>add-to-list 'git-link-commit-remote-alist
+      '<span style="color: #709870;">(</span><span style="color: #8b2252;">"github.example.com"</span> git-link-commit-github<span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+</section>
+<section id="slide-orgf297be1">
+<h3 id="orgf297be1">git-link</h3>
+<ul>
+<li><code>M-x package-install</code> <code>git-link</code></li>
+<li><a href="https://github.com/sshaw/git-link">https://github.com/sshaw/git-link</a></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org1973f17">
+<h2 id="org1973f17">Sharing Bits of Code: Snippets</h2>
+<p>
+<code>M-x copy-as-format</code>
+</p>
+
+
+<div class="figure">
+<p><a href="https://github.com/sshaw/copy-as-format"><img src="img/copy-as-format-homepage.png" alt="copy-as-format-homepage.png" /></a>
+</p>
+</div>
+
+</section>
+<section id="slide-org594cb35">
+<h3 id="org594cb35">copy-as-format</h3>
+<ul>
+<li>Copy buffer locations as formatted code &amp; add to kill ring</li>
+<li>Supports GitHub, Slack, JIRA, HipChat, HTML, and more</li>
+<li>Accounts for current line and active region</li>
+
+</ul>
+
+</section>
+<section id="slide-org26330aa">
+<h3 id="org26330aa">copy-as-format</h3>
+
+<div class="figure">
+<p><img src="./img/github-issue-formatted-code1.png" alt="github-issue-formatted-code1.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org1ef4b04">
+<h3 id="org1ef4b04">copy-as-format</h3>
+
+<div class="figure">
+<p><img src="./img/github-issue-formatted-code2.png" alt="github-issue-formatted-code2.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgfc2cf4f">
+<h3 id="orgfc2cf4f">copy-as-format</h3>
+
+<div class="figure">
+<p><img src="./img/slack-code-formatted-code1.png" alt="slack-code-formatted-code1.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgf874edb">
+<h3 id="orgf874edb">copy-as-format</h3>
+
+<div class="figure">
+<p><img src="./img/slack-code-formatted-code2.png" alt="slack-code-formatted-code2.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org8f883e0">
+<h3 id="org8f883e0">copy-as-format</h3>
+
+<div class="figure">
+<p><img src="./img/disqus-comment.png" alt="disqus-comment.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org589351b">
+<h3 id="org589351b">copy-as-format</h3>
+
+<div class="figure">
+<p><img src="./img/disqus-comment-formatted-code.png" alt="disqus-comment-formatted-code.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org1ed9a59">
+<h3 id="org1ed9a59">copy-as-format</h3>
+<p>
+<code>C-u M-x copy-as-format</code> prompts for format
+</p>
+
+<p>
+Set default format
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">defaults to markdown</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span> copy-as-format-default <span style="color: #8b2252;">"github"</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Bind some keys
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-emacs-lisp"><span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-c w s"</span><span style="color: #7388d6;">)</span> 'copy-as-format-slack<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-c w g"</span><span style="color: #7388d6;">)</span> 'copy-as-format-github<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+</section>
+<section id="slide-org4eb4d23">
+<h3 id="org4eb4d23">copy-as-format</h3>
+<p>
+Add a format
+</p>
+<div class="org-src-container">
+
+<pre  class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">copy-as-format-org-mode</span> <span style="color: #7388d6;">(</span>text multiline<span style="color: #7388d6;">)</span>
+  <span style="color: #7388d6;">(</span>format <span style="color: #8b2252;">"#+BEGIN_SRC %s\n%s\n#+END_SRC\n"</span>
+          <span style="color: #909183;">(</span>replace-regexp-in-string <span style="color: #8b2252;">"-mode\\'"</span> <span style="color: #8b2252;">""</span> <span style="color: #709870;">(</span>symbol-name major-mode<span style="color: #709870;">)</span><span style="color: #909183;">)</span>
+          text<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+<span style="color: #707183;">(</span>add-to-list 'copy-as-format-format-alist
+  '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"org-mode"</span> copy-as-format-org-mode<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+</section>
+<section id="slide-org56a71b1">
+<h3 id="org56a71b1">copy-as-format</h3>
+<ul>
+<li><code>M-x package-install</code> <code>copy-as-format</code></li>
+<li><a href="https://github.com/sshaw/copy-as-format">https://github.com/sshaw/copy-as-format</a></li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/head.min.js"></script>
+<script src="https://cdn.jsdelivr.net/reveal.js/3.0.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>
