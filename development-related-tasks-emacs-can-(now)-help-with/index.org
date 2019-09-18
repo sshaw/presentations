@@ -1,0 +1,226 @@
+#+AUTHOR: Skye Shaw • [[https://github.com/sshaw][github.com/sshaw]]
+#+TITLE: Development Related Tasks Emacs Can (Now?) Help With
+#+OPTIONS: num:nil toc:nil timestamp:nil
+#+REVEAL_EXTRA_CSS: styles.css
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/reveal.js/3.0.0/
+
+* Checking Builds on CI Services
+** CircleCI
+[[./img/circleci-builds.png]]
+
+** Travis CI
+[[./img/travis-ci-builds.png]]
+
+* Sharing Bits of Code
+** Bug Reports
+[[./img/github-issue.png]]
+
+** Comments
+[[./img/github-comment.png]]
+[[./img/disqus-comment.png]]
+
+** Messaging
+[[./img/slack-link1.png]]
+[[./img/slack-code.png]]
+[[./img/slack-link2.png]]
+
+* How Can Emacs Help?
+
+[[./img/sublime-emacs.png]]
+
+* Checking Builds on CI Services
+
+~M-x build-status-mode~
+
+#+ATTR_HTML: alt="build-status: mode line build status indicator"
+[[https://github.com/sshaw/build-status][file:img/build-status-homepage.png]]
+
+** build-status
+
+- Detects a project's CI config file
+- Shows the build's status in the mode line
+- Click the build status lighter to open the build's web page
+- Works with Travis CI & CircleCI
+
+** build-status
+
+Set your token
+#+BEGIN_SRC emacs-lisp
+;; optional
+(setq build-status-travis-ci-token "TOKEN")
+#+END_SRC
+
+Can also be set via Git
+#+BEGIN_SRC shell-script
+git config --add build-status.api-token TOKEN
+#+END_SRC
+
+Set the check interval
+#+BEGIN_SRC emacs-lisp
+;; optional, defaults to 300
+(setq build-status-check-interval 120)
+#+END_SRC
+
+** build-status
+
+#+STYLE: <style type="text/css">
+#+STYLE: .reveal p { text-align: left }
+#+STYLE: </style>
+
+Adjust some colors
+#+BEGIN_SRC emacs-lisp
+(set-face-foreground 'build-status-passed-face "tan1")
+(set-face-background 'build-status-queued-face "mediumblue")
+#+END_SRC
+
+Ignore a status
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'build-status-travis-ci-status-mapping-alist
+             '("created" . ignore))
+#+END_SRC
+
+** build-status
+
+- ~M-x package-install~ ~build-status~
+[[https://github.com/sshaw/build-status][https://github.com/sshaw/build-status]]
+
+* Sharing Bits of Code
+- Links & URLs
+- Snippets
+
+* Sharing Bits of Code: Links & URLs
+
+~M-x git-link~
+
+[[https://github.com/sshaw/git-link][file:img/git-link-homepage.png]]
+
+** git-link
+
+- Adds GitHub/Bitbucket URL for a buffer location to kill ring
+- Accounts for current line number and active region
+- Link to commit at point
+- Works with [[https://github.com/pidu/git-timemachine][Git Time Machine]]
+- Supports GitLab too
+- And more!
+
+** git-link
+
+~C-u M-x git-link~ prompts for remote.
+
+Always use Git SHA in link
+#+BEGIN_SRC emacs-lisp
+(setq git-link-use-commit t)
+#+END_SRC
+
+Set the defaults
+#+BEGIN_SRC emacs-lisp
+;; defaults to origin
+(setq git-link-default-remote "og")
+;; defaults to master
+(setq git-link-default-branch "featureX")
+#+END_SRC
+
+Defaults can also be set via Git
+#+BEGIN_SRC shell-script
+git config --add git-link.remote og
+git config --add git-link.branch featureX
+#+END_SRC
+
+** git-link
+
+Open link on kill
+#+BEGIN_SRC emacs-lisp
+(setq git-link-open-in-browser t)
+#+END_SRC
+
+Bind some keys
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-c g l") 'git-link)
+(global-set-key (kbd "C-c g c") 'git-link-commit)
+(global-set-key (kbd "C-c g h") 'git-link-homepage)
+#+END_SRC
+
+Add private repository
+#+BEGIN_SRC emacs-lisp
+(eval-after-load 'git-link
+  '(progn
+    (add-to-list 'git-link-remote-alist
+      '("github.example.com" git-link-github))
+    (add-to-list 'git-link-commit-remote-alist
+      '("github.example.com" git-link-commit-github))))
+#+END_SRC
+
+** git-link
+
+- ~M-x package-install~ ~git-link~
+- [[https://github.com/sshaw/git-link][https://github.com/sshaw/git-link]]
+
+* Sharing Bits of Code: Snippets
+
+~M-x copy-as-format~
+
+[[https://github.com/sshaw/copy-as-format][file:img/copy-as-format-homepage.png]]
+
+** copy-as-format
+
+- Copy buffer locations as formatted code & add to kill ring
+- Supports GitHub, Slack, JIRA, HipChat, HTML, and more
+- Accounts for current line and active region
+
+** copy-as-format
+
+[[./img/github-issue-formatted-code1.png]]
+
+** copy-as-format
+
+[[./img/github-issue-formatted-code2.png]]
+
+** copy-as-format
+
+[[./img/slack-code-formatted-code1.png]]
+
+** copy-as-format
+
+[[./img/slack-code-formatted-code2.png]]
+
+** copy-as-format
+
+[[./img/disqus-comment.png]]
+
+** copy-as-format
+
+[[./img/disqus-comment-formatted-code.png]]
+
+** copy-as-format
+
+~C-u M-x copy-as-format~ prompts for format
+
+Set default format
+#+BEGIN_SRC emacs-lisp
+;; defaults to markdown
+(setq copy-as-format-default "github")
+#+END_SRC
+
+Bind some keys
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-c w s") 'copy-as-format-slack)
+(global-set-key (kbd "C-c w g") 'copy-as-format-github)
+#+END_SRC
+
+** copy-as-format
+
+Add a format
+#+BEGIN_SRC emacs-lisp
+(defun copy-as-format-org-mode (text multiline)
+  (format "#+BEGIN_SRC %s\n%s\n#+END_SRC\n"
+          (replace-regexp-in-string "-mode\\'" "" (symbol-name major-mode))
+          text))
+
+(add-to-list 'copy-as-format-format-alist
+  '("org-mode" copy-as-format-org-mode))
+#+END_SRC
+
+** copy-as-format
+
+- ~M-x package-install~ ~copy-as-format~
+- [[https://github.com/sshaw/copy-as-format][https://github.com/sshaw/copy-as-format]]

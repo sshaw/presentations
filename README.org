@@ -1,6 +1,12 @@
+#+OPTIONS: timestamp:nil
+
 * Presentations
 
-Source code for presentations I've given. The presentations are
-written in [[https://en.wikipedia.org/wiki/Org-mode][Org-mode]] and exported via [[https://github.com/yjwen/org-reveal][Org-Reveal]].
+Presentations I've given. The presentations are written in [[https://en.wikipedia.org/wiki/Org-mode][Org-mode]]
+and exported via [[https://github.com/yjwen/org-reveal][Org-Reveal]].
 
-- [[file:my-mostly-ruby-related-dotfiles-and-other-stuff][My (Mostly Ruby Related) Dotfiles and Other Stuff]]
+You can view them [[https://sshaw.github.io/presentations/][on the web as a slide show]] or as single file by
+opening ~index.org~ in [[https://github.com/sshaw/presentations][the GitHub repository]].
+
+- [[https://sshaw.github.io/presentations/development-related-tasks-emacs-can-(now)-help-with][Development Related Tasks Emacs Can (Now?) Help With]]
+- [[https://sshaw.github.io/presentations/my-mostly-ruby-related-dotfiles-and-other-stuff/][My (Mostly Ruby Related) Dotfiles and Other Stuff]]
