@@ -1201,7 +1201,7 @@ provider: duckduckgo
 
 #+REVEAL: split
 
-[[file:img/instagram-search.png]]
+[[file:img/gram-search.png]]
 
 ** There Are *a Ton* of Providers
 
