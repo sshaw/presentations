@@ -1,0 +1,6 @@
+* Presentations
+
+Source code for presentations I've given. The presentations are
+written in [[https://en.wikipedia.org/wiki/Org-mode][Org-mode]] and exported via [[https://github.com/yjwen/org-reveal][Org-Reveal]].
+
+- [[file:my-mostly-ruby-related-dotfiles-and-other-stuff][My (Mostly Ruby Related) Dotfiles and Other Stuff]]
